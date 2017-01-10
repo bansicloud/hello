@@ -1,32 +1,41 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Multiparty Chatroom</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-         <link rel="stylesheet" type="text/css" href="/easyrtc/easyrtc.css" />
+  <html>
+      <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+          <meta name="description" content="">
+          <meta name="keywords" content="">
+          <meta name="author" content="Vasanth.V">
+          <title>MyFirst app</title>
+          <script src="/socket.io/socket.io.js"></script>
+          <link rel="stylesheet" type="text/css" href="style.css" />
+          <script type="text/javascript" src="easyrtc.js"></script>
+          <script type="text/javascript" src="script.js"></script>
+      </head>
+      <body onload="connect()">
+          <div id="wrap">
+              <div id="selfWrap" class="divHolder">
+                <video autoplay="autoplay" class="easyrtcMirror" id="selfVideo" muted="muted" volume="0" ></video>
+              </div>
 
-        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
-        <script src="/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="/easyrtc/easyrtc.js"></script>
-        <link rel="stylesheet" type="text/css" href="demo_room.css" />
-        <script type="text/javascript" src="demo_multiparty.js"></script>
-    </head>
+              <div id="caller1" class="divHolder">
+                <video autoplay="autoplay" class="callerVideo" id="callerVideo1"></video>
+              </div>
 
-    <body onload="appInit()">
-        <div id="fullpage"  class="boxCommon" style="background-image:url(images/irongrip.png)">
-            <video id="box0" class="transit boxCommon thumbCommon easyrtcMirror" muted="muted" volume="0" ></video>
-            <video id="box1" class="transit boxCommon thumbCommon" style="visibility:hidden"></video>
-            <video id="box2" class="transit boxCommon thumbCommon" style="visibility:hidden"></video>
-            <video id="box3" class="transit boxCommon thumbCommon" style="visibility:hidden"></video>
-            <div id="textentryBox" onsubmit="sendText()" style="display:none" >
-                <input type="text" id="textentryField"  class="transit boxcommon" /><br>
-                <button id="textentrySubmit" style="float:right;margin-right:1em" onclick="sendText()">Send</button>
-                <button id="textentryCancel" style="float:left;margin-left:1em" onclick="cancelText()">Cancel</button>
-            </div>
+              <div id="caller2" class="divHolder">
+                <video autoplay="autoplay" class="callerVideo" id="callerVideo2"></video>
+              </div>
 
-            <img id="killButton" class="transit boxCommon" onclick="killActiveBox()" src="images/button_close.png" style="display:none;z-index:3" alt="close button" />
-            <img id="muteButton" class="transit boxCommon" onclick ="muteActiveBox()" src="images/button_mute.png" style="display:none;z-index:3" alt="mute button" />
-            <img id="textEntryButton" class="transit boxCommon" onclick ="showTextEntry()" src="images/textEntry.png" style="z-index:3;display:none" alt="text button" />
-        </div>
-    </body>
-</html>
+              <div id="caller3" class="divHolder">
+                <video autoplay="autoplay" class="callerVideo" id="callerVideo3"></video>
+              </div>
+              <div id="caller4" class="divHolder">
+                <video autoplay="autoplay" class="callerVideo" id="callerVideo4"></video>
+              </div>
+              <div id="caller5" class="divHolder">
+                <video autoplay="autoplay" class="callerVideo" id="callerVideo5"></video>
+              </div>
+          </div>
+          <button id="copyURL">Copy</button>
+      </body>
+  </html>

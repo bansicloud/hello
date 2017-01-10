@@ -30,7 +30,7 @@ var config = {
 	PAGE_LIMIT: 50
 }
 
-app.get('/', function (req, res) {
+app.get('/:token', function (req, res) {
 	res.sendfile(__dirname + '/www/index.html');
 });
 

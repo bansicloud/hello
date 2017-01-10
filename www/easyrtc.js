@@ -4198,24 +4198,22 @@ var Easyrtc = function() {
         var errorDiv = document.getElementById('easyrtcErrorDialog');
         var errorBody;
         if (!errorDiv) {
-            errorDiv = document.createElement("div");
-            errorDiv.id = 'easyrtcErrorDialog';
-            var title = document.createElement("div");
-            title.innerHTML = "Error messages";
-            title.className = "easyrtcErrorDialog_title";
-            errorDiv.appendChild(title);
-            errorBody = document.createElement("div");
-            errorBody.id = "easyrtcErrorDialog_body";
-            errorDiv.appendChild(errorBody);
-            var clearButton = document.createElement("button");
-            clearButton.appendChild(document.createTextNode("Okay"));
-            clearButton.className = "easyrtcErrorDialog_okayButton";
-            clearButton.onclick = function() {
+            var clearError = function() {
                 errorBody.innerHTML = ""; // remove all inner nodes
                 errorDiv.style.display = "none";
             };
+            errorDiv = document.createElement("div");
+            errorDiv.id = 'easyrtcErrorDialog';
+            var clearButton = document.createElement("span");
+            clearButton.innerHTML = "&times;";
+            clearButton.className = "easyrtcErrorDialog_closeButton";
+            clearButton.onclick = clearError;
             errorDiv.appendChild(clearButton);
+            errorBody = document.createElement("div");
+            errorBody.id = "easyrtcErrorDialog_body";
+            errorDiv.appendChild(errorBody);
             document.body.appendChild(errorDiv);
+            setTimeout(clearError, 5000);
         }
 
         errorBody = document.getElementById("easyrtcErrorDialog_body");
