@@ -51,7 +51,7 @@ function getRoomName(){
   var roomName = location.pathname.substring(1);
   if(roomName == '') {
     var roomName = randomRoom();
-    var newurl = location.href +'/'+ roomName;
+    var newurl = location.href + roomName;
     window.history.pushState({url: newurl}, roomName, newurl);
   }
   return roomName;
@@ -59,6 +59,10 @@ function getRoomName(){
 var randomRoom = function () {
   return Math.random().toString(36).substr(2, 10);
 };
+function setRoomName(){
+  document.title = "Hello ("+getRoomName()+")";
+
+}
 function setClipboardText(text){
     var id = "mycustom-clipboard-textarea-hidden-id";
     var existsTextarea = document.getElementById(id);
