@@ -26,8 +26,7 @@ app.use(function(req, res, next) {
 });
 
 var config = {
-	PORT: process.env.PORT || 3000,
-	PAGE_LIMIT: 50
+	PORT: process.env.PORT || 3000
 }
 
 app.get('/:token', function (req, res) {

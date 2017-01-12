@@ -9,6 +9,7 @@ function connect() {
     setClipboardText(location.href);
     easyrtc.showError('','URL copied.');
   });
+  window.addEventListener("resize", setVideos);
 }
 function callEverybodyElse(roomName, otherPeople) {
   easyrtc.setRoomOccupantListener(null); 
@@ -37,17 +38,16 @@ function callEverybodyElse(roomName, otherPeople) {
   }
 }
 function connectionSuccess(easyrtcid) {
-  document.getElementById('selfVideo').style.visibility = 'visible';
-  setTimeout(function(){
-    var videoHeight = document.getElementById('selfVideo').offsetHeight;
-    console.log(videoHeight);
-    for (var i = 0; i < document.getElementsByClassName('callerVideo').length; i++) {
-      document.getElementsByClassName('callerVideo')[i].style.height = videoHeight+'px';
-    }
-  }, 100);
+  setTimeout(setVideos, 100);
 }
 function connectionFailure(errorCode, message) {
   easyrtc.showError(errorCode, message);
+}
+function setVideos(){
+  var videoHeight = document.getElementById('selfVideo').offsetHeight;
+  for (var i = 0; i < document.getElementsByClassName('callerVideo').length; i++) {
+    document.getElementsByClassName('callerVideo')[i].style.height = videoHeight+'px';
+  }  
 }
 function getRoomName(){
   var roomName = location.pathname.substring(1);
