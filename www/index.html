@@ -8,37 +8,39 @@
           <meta name="author" content="Vasanth.V">
           <title>Hello</title>
           <script src="/socket.io/socket.io.js"></script>
+          <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
           <link rel="stylesheet" type="text/css" href="style.css" />
           <script type="text/javascript" src="easyrtc.js"></script>
           <script type="text/javascript" src="script.js"></script>
       </head>
       <body onload="connect()">
           <div id="wrap">
-              <div id="selfWrap" class="divHolder">
-                <video autoplay="autoplay" class="easyrtcMirror" id="selfVideo" muted="muted" volume="0" ></video>
-              </div>
-
-              <div id="caller1" class="divHolder">
-                <video autoplay="autoplay" class="callerVideo" id="callerVideo1"></video>
-              </div>
-
-              <div id="caller2" class="divHolder">
-                <video autoplay="autoplay" class="callerVideo" id="callerVideo2"></video>
-              </div>
-
-              <div id="caller3" class="divHolder">
-                <video autoplay="autoplay" class="callerVideo" id="callerVideo3"></video>
-              </div>
-              <div id="caller4" class="divHolder">
-                <video autoplay="autoplay" class="callerVideo" id="callerVideo4"></video>
-              </div>
-              <div id="caller5" class="divHolder">
-                <video autoplay="autoplay" class="callerVideo" id="callerVideo5"></video>
-              </div>
+            <div id="selfWrap" class="divHolder">
+              <video autoplay="autoplay" class="easyrtcMirror" id="selfVideo" muted="muted" volume="0" ></video>
+            </div>
+            <div id="caller1" class="divHolder">
+              <video autoplay="autoplay" class="callerVideo" id="callerVideo1"></video>
+            </div>
+            <div id="caller2" class="divHolder">
+              <video autoplay="autoplay" class="callerVideo" id="callerVideo2"></video>
+            </div>
+            <div id="caller3" class="divHolder">
+              <video autoplay="autoplay" class="callerVideo" id="callerVideo3"></video>
+            </div>
+            <div id="caller4" class="divHolder">
+              <video autoplay="autoplay" class="callerVideo" id="callerVideo4"></video>
+            </div>
+            <div id="caller5" class="divHolder">
+              <video autoplay="autoplay" class="callerVideo" id="callerVideo5"></video>
+            </div>
+            <div class="spacer"></div>
+            <div id="about">
+              Invite friends by sharing the URL.<br/> <span id="madeby">Made by <a href="https://twitter.com/vsnthv" title="Vasanth V" target="_blank">@vsnthv</a></span>.
+            </div>
           </div>
           <div id="footer">
-            <div id="roomName">Test</div>
-            <button id="copyURL">Copy</button>
+            <button id="roomName">Test</button>
+            <button id="copyURL">Copy URL</button>
           </div>
       </body>
   </html>

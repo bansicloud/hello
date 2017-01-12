@@ -4,8 +4,10 @@ function connect() {
   easyrtc.joinRoom(getRoomName());
   easyrtc.setRoomOccupantListener(callEverybodyElse);
   easyrtc.easyApp("easyrtc.multiparty", "selfVideo", ["callerVideo1", "callerVideo2", "callerVideo3"], connectionSuccess, connectionFailure);
+  setRoomName();
   document.getElementById('copyURL').addEventListener('click', function(){
     setClipboardText(location.href);
+    easyrtc.showError('','URL copied.');
   });
 }
 function callEverybodyElse(roomName, otherPeople) {
@@ -60,8 +62,7 @@ var randomRoom = function () {
   return Math.random().toString(36).substr(2, 10);
 };
 function setRoomName(){
-  document.title = "Hello ("+getRoomName()+")";
-
+  document.getElementById('roomName').innerHTML = '/'+getRoomName();
 }
 function setClipboardText(text){
     var id = "mycustom-clipboard-textarea-hidden-id";
