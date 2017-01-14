@@ -9,6 +9,9 @@ function connect() {
     setClipboardText(location.href);
     easyrtc.showError('','URL copied.');
   });
+  document.getElementById('closeintro').addEventListener('click', function(){
+    document.getElementById('fixed').style.display = 'none';
+  });
   window.addEventListener("resize", setVideos);
 }
 function callEverybodyElse(roomName, otherPeople) {
@@ -38,6 +41,7 @@ function callEverybodyElse(roomName, otherPeople) {
   }
 }
 function connectionSuccess(easyrtcid) {
+  document.getElementById('fixed').style.display = 'block';
   setTimeout(setVideos, 100);
 }
 function connectionFailure(errorCode, message) {
@@ -62,7 +66,7 @@ var randomRoom = function () {
   return Math.random().toString(36).substr(2, 10);
 };
 function setRoomName(){
-  document.getElementById('roomName').innerHTML = '/'+getRoomName();
+  document.getElementById('roomName').innerHTML = 'sayhello.li/'+getRoomName();
 }
 function setClipboardText(text){
     var id = "mycustom-clipboard-textarea-hidden-id";
