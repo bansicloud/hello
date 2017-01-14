@@ -20,6 +20,7 @@ video {width:320px;height:240px;display: block;}
 #weburl{font-size: 110%;font-weight: bold;}
 #footer{position: fixed;bottom: 10px;left:10px;background: rgba(50,50,50,0.7);color: #fff;padding:5px 15px;font-size: 150%;-webkit-border-radius: 50px;-moz-border-radius: 50px;border-radius: 50px;border:none;}
 #copyURL{color: #dcdcdc;background:none;padding:5px 5px 5px 15px;border:none;}
+#twitter{position: fixed;bottom: 5px;right:12px;}
 
 @media only screen and (min-width: 120px) and (max-width: 640px) {
     .divHolder {width: 50%;}
