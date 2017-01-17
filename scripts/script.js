@@ -1,18 +1,29 @@
-var maxCALLERS = 7
-;
+var maxCALLERS = 7;
+var isInIFrame = (window.location != window.parent.location);
+
 function connect() {
   easyrtc.dontAddCloseButtons();
   easyrtc.joinRoom(getRoomName());
   easyrtc.setRoomOccupantListener(callEverybodyElse);
   easyrtc.easyApp("easyrtc.multiparty", "selfVideo", ["callerVideo1", "callerVideo2", "callerVideo3", "callerVideo4", "callerVideo5", "callerVideo6", "callerVideo7"], connectionSuccess, connectionFailure);
   setRoomName();
-  document.getElementById('copyURL').addEventListener('click', function(){
-    setClipboardText(location.href);
-    easyrtc.showError('','URL copied.');
-  });
-  document.getElementById('closeintro').addEventListener('click', function(){
-    document.getElementById('fixed').style.display = 'none';
-  });
+  if(isInIFrame === false){
+    document.getElementById('selfWrap').style.backgroundColor = '#34495e';
+    document.getElementById('caller1').style.backgroundColor = '#3498db';
+    document.getElementById('caller2').style.backgroundColor = '#2ecc71';
+    document.getElementById('caller3').style.backgroundColor = '#f1c40f';
+    document.getElementById('caller4').style.backgroundColor = '#e67e22';
+    document.getElementById('caller5').style.backgroundColor = '#e74c3c';
+    document.getElementById('caller6').style.backgroundColor = '#8e44ad';
+    document.getElementById('caller7').style.backgroundColor = '#16a085';
+    document.getElementById('copyURL').addEventListener('click', function(){
+      setClipboardText(location.href);
+      easyrtc.showError('','URL copied.');
+    });
+    document.getElementById('closeintro').addEventListener('click', function(){
+      document.getElementById('fixed').style.display = 'none';
+    });
+  }
 }
 function callEverybodyElse(roomName, otherPeople) {
   easyrtc.setRoomOccupantListener(null); 
@@ -41,6 +52,7 @@ function callEverybodyElse(roomName, otherPeople) {
   }
 }
 function connectionSuccess(easyrtcid) {
+  if(isInIFrame === false)
   document.getElementById('fixed').style.display = 'block';
 }
 function connectionFailure(errorCode, message) {
@@ -59,7 +71,10 @@ var randomRoom = function () {
   return Math.random().toString(36).substr(2, 10);
 };
 function setRoomName(){
+  if(isInIFrame === false){
   document.getElementById('roomName').innerHTML = 'sayhello.li/'+getRoomName();
+  document.getElementById('roomName2').innerHTML = getRoomName();
+  }
 }
 function setClipboardText(text){
     var id = "mycustom-clipboard-textarea-hidden-id";
