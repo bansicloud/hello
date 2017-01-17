@@ -1,4 +1,5 @@
-var maxCALLERS = 7;
+var maxCALLERS = 7
+;
 function connect() {
   easyrtc.dontAddCloseButtons();
   easyrtc.joinRoom(getRoomName());
@@ -41,7 +42,6 @@ function callEverybodyElse(roomName, otherPeople) {
 }
 function connectionSuccess(easyrtcid) {
   document.getElementById('fixed').style.display = 'block';
-  setTimeout(setVideos, 100);
 }
 function connectionFailure(errorCode, message) {
   easyrtc.showError(errorCode, message);
