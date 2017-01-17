@@ -1,9 +1,9 @@
-var maxCALLERS = 5;
+var maxCALLERS = 7;
 function connect() {
   easyrtc.dontAddCloseButtons();
   easyrtc.joinRoom(getRoomName());
   easyrtc.setRoomOccupantListener(callEverybodyElse);
-  easyrtc.easyApp("easyrtc.multiparty", "selfVideo", ["callerVideo1", "callerVideo2", "callerVideo3"], connectionSuccess, connectionFailure);
+  easyrtc.easyApp("easyrtc.multiparty", "selfVideo", ["callerVideo1", "callerVideo2", "callerVideo3", "callerVideo4", "callerVideo5", "callerVideo6", "callerVideo7"], connectionSuccess, connectionFailure);
   setRoomName();
   document.getElementById('copyURL').addEventListener('click', function(){
     setClipboardText(location.href);
@@ -12,7 +12,6 @@ function connect() {
   document.getElementById('closeintro').addEventListener('click', function(){
     document.getElementById('fixed').style.display = 'none';
   });
-  window.addEventListener("resize", setVideos);
 }
 function callEverybodyElse(roomName, otherPeople) {
   easyrtc.setRoomOccupantListener(null); 
@@ -46,12 +45,6 @@ function connectionSuccess(easyrtcid) {
 }
 function connectionFailure(errorCode, message) {
   easyrtc.showError(errorCode, message);
-}
-function setVideos(){
-  var videoHeight = document.getElementById('selfVideo').offsetHeight;
-  for (var i = 0; i < document.getElementsByClassName('callerVideo').length; i++) {
-    document.getElementsByClassName('callerVideo')[i].style.height = videoHeight+'px';
-  }  
 }
 function getRoomName(){
   var roomName = location.pathname.substring(1);

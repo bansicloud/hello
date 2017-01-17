@@ -1,40 +1,36 @@
 *{font-family: 'Open Sans', sans-serif;font-size: 100%;}
+html, body{height: 100%;}
 body{margin: 0px;background: #F8F4DE;}
-video {width:320px;height:240px;display: block;}
+video {width:100%;height:auto;height:100%;object-fit: cover;}
 
 #easyrtcErrorDialog {background-color: #f39c12;position:fixed;right: 0px;top:0px;left:0px;z-index: 30;opacity: 0.95;padding: 20px;}
 #easyrtcErrorDialog_body{position:static;height:auto;overflow-y:auto;font-size: 200%;color: #fff;}
 .easyrtcErrorDialog_closeButton {cursor: pointer;position:static;clear:both;float:right;font-size: 200%;}
 
-#wrap{width: 100%;max-width: 960px;margin: auto;}
-.divHolder {position:relative;float:left;}
+#wrap{width: 100%;height:100%;margin: auto;}
+.divHolder {position:relative;float:left;width: 25%;height: 50%;overflow: hidden;}
 #selfWrap{background-color: #34495e;}
 #caller1{background-color: #3498db;}
 #caller2{background-color: #2ecc71;}
 #caller3{background-color: #f1c40f;}
 #caller4{background-color: #e67e22;}
 #caller5{background-color: #e74c3c;}
+#caller6{background-color: #8e44ad;}
+#caller7{background-color: #16a085;}
 #selfVideo {-webkit-transform: scaleX(-1);-moz-transform: scaleX(-1);-ms-transform: scaleX(-1);-o-transform: scaleX(-1);transform: scaleX(-1);}
 
 #fixed{position:fixed;left:10px;bottom:10px;right:10px;display: none;}
-#intro{background:#fff;text-align:center;width:100%;max-width:780px;margin:auto;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;-webkit-box-shadow: 0px 0px 10px 2px #888;-moz-box-shadow: 0px 0px 10px 2px #888;box-shadow: 0px 0px 10px 2px #888;}
+#intro{background:#fff;text-align:center;width:100%;max-width:640px;margin:auto;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;-webkit-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.5);-moz-box-shadow: 0px 0px 10px 2px  rgba(0,0,0,0.5);box-shadow: 0px 0px 10px 2px  rgba(0,0,0,0.5);}
 #inner{padding: 25px;}
 #closeintro{float: right;background: #2c3e50;color:#fff;border:none;padding:10px;font-size: 200%;line-height: 20px;position:relative;top:-10px;right:-10px;-webkit-border-radius: 30px;-moz-border-radius: 30px;border-radius: 30px;}
 #urlwrap{padding: 5px;}
 #roomName{background-color: #dcdcdc;padding: 5px 10px;}
 #copyURL{color: #fff;background:#16a085;padding:5px 10px;border:none;}
 #weburl{font-size: 110%;font-weight: bold;}
-#ads{height:90px;}
-#terms{font-size: 70%;color: #ababab;text-align: left;}
+#terms{font-size: 70%;color: #ababab;text-align: left;margin-top: 10px;}
 #maker{padding-top: 5px;}
 #twitter{color: #2980b9;}
 
-
-@media only screen and (min-width: 120px) and (max-width: 640px) {
-    .divHolder {width: 50%;}
-    video {width:100%;height:auto;}
-}
-
-@media only screen and (min-width: 640px) and (max-width: 960px){
-    #wrap{max-width: 640px;}
+@media only screen and (max-width: 768px) {
+    .divHolder {width: 50%;height: 25%;}
 }
