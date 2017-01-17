@@ -1,4 +1,4 @@
-var maxCALLERS = 3;
+var maxCALLERS = 5;
 function connect() {
   easyrtc.dontAddCloseButtons();
   easyrtc.joinRoom(getRoomName());
