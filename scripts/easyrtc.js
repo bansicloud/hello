@@ -51,7 +51,7 @@ return {
   "localMediaError": "Error getting local media stream: {0}",
   "miscSignalError": "Miscellaneous error from signalling server. It may be ignorable.",
   "noServer": "Unable to reach the signalling server.",
-  "badsocket": "Socket.io connect event fired with bad websocket.",
+  "badsocket": "Bad websocket connection.",
   "icf": "Internal communications failure",
   "statsNotSupported":"call statistics not supported by this browser, try Chrome.",
    "noWebrtcSupport":"Your browser doesn't appear to support WebRTC, try Chrome.",
