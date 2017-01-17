@@ -33,13 +33,10 @@ app.get('/:token', function (req, res) {
 	res.sendfile(__dirname + '/www/index.html');
 });
 
-
 var webServer = http.createServer(app).listen(config.PORT);
-
 
 // Start Socket.io so it attaches itself to Express server
 var socketServer = socketIo.listen(webServer, {"log level":1});
-
 
 easyrtc.setOption("logLevel", "debug");
 
@@ -78,5 +75,14 @@ var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
 
 //listen on port 8080
 webServer.listen(config.PORT, function () {
-    console.log('listening on http://localhost:8080');
+    console.log('listening on '+config.PORT);
+});
+
+//minimize the public scripts
+var fs = require('fs');
+var UglifyJS = require('uglify-js'); 
+var result = UglifyJS.minify(["scripts/easyrtc.js", "scripts/script.js"]);
+fs.writeFile("www/script.min.js", result.code, function(err) {
+    if(err) console.log(err);
+    else console.log("File was successfully saved.");
 });

@@ -25,7 +25,8 @@
     "socket.io": "",
     "async": "0.2.x",
     "colors": "*",
-    "underscore": "1.5.x"
+    "underscore": "1.5.x",
+    "uglify-js": ""
   },
   "devDependencies": {
     "fs": "0.0.2",
