@@ -1,6 +1,75 @@
 <?xml version="1.0" ?>
-<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-   <circle cx="50" cy="50" r="30" stroke="#333" stroke-width="15" fill-opacity="0"/>
-   <circle cx="50" cy="50" r="10" stroke="#333" stroke-width="10" fill-opacity="0"/>
-   <circle cx="50" cy="20" r="1" stroke="#fff" stroke-width="3" fill-opacity="0"/>
+<svg width="80" height="80" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<defs>
+		<filter id="f1" x="0" y="0">
+			<feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+		</filter>
+		<filter id="f2" x="0" y="0">
+			<feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+		</filter>
+		<filter id="f3" x="0" y="0">
+			<feGaussianBlur in="SourceGraphic" stdDeviation="15" />
+		</filter>
+		<filter id="f4" x="0" y="0">
+			<feGaussianBlur in="SourceGraphic" stdDeviation="20" />
+		</filter>
+		<filter id="f5" x="0" y="0">
+			<feGaussianBlur in="SourceGraphic" stdDeviation="25" />
+		</filter>
+	</defs>
+	<g filter="url(#f5)">
+		<rect x="0" y="0" width="20" height="40" fill="#AB7967"/>
+		<rect x="20" y="0" width="20" height="40" fill="#C594C5"/>
+		<rect x="40" y="0" width="20" height="40" fill="#6699CC"/>
+		<rect x="60" y="0" width="20" height="40" fill="#5FB3B3"/>
+		<rect x="0" y="40" width="20" height="40" fill="#EC5F67"/>
+		<rect x="20" y="40" width="20" height="40" fill="#F99157"/>
+		<rect x="40" y="40" width="20" height="40" fill="#FAC863"/>
+		<rect x="60" y="40" width="20" height="40" fill="#99C794"/>
+	</g>	
+	<g filter="url(#f4)">
+		<rect x="0" y="0" width="20" height="40" fill="#AB7967"/>
+		<rect x="20" y="0" width="20" height="40" fill="#C594C5"/>
+		<rect x="40" y="0" width="20" height="40" fill="#6699CC"/>
+		<rect x="60" y="0" width="20" height="40" fill="#5FB3B3"/>
+		<rect x="0" y="40" width="20" height="40" fill="#EC5F67"/>
+		<rect x="20" y="40" width="20" height="40" fill="#F99157"/>
+		<rect x="40" y="40" width="20" height="40" fill="#FAC863"/>
+		<rect x="60" y="40" width="20" height="40" fill="#99C794"/>
+	</g>	
+	<g filter="url(#f3)">
+		<rect x="0" y="0" width="20" height="40" fill="#AB7967"/>
+		<rect x="20" y="0" width="20" height="40" fill="#C594C5"/>
+		<rect x="40" y="0" width="20" height="40" fill="#6699CC"/>
+		<rect x="60" y="0" width="20" height="40" fill="#5FB3B3"/>
+		<rect x="0" y="40" width="20" height="40" fill="#EC5F67"/>
+		<rect x="20" y="40" width="20" height="40" fill="#F99157"/>
+		<rect x="40" y="40" width="20" height="40" fill="#FAC863"/>
+		<rect x="60" y="40" width="20" height="40" fill="#99C794"/>
+	</g>	
+	<g filter="url(#f2)">
+		<rect x="0" y="0" width="20" height="40" fill="#AB7967"/>
+		<rect x="20" y="0" width="20" height="40" fill="#C594C5"/>
+		<rect x="40" y="0" width="20" height="40" fill="#6699CC"/>
+		<rect x="60" y="0" width="20" height="40" fill="#5FB3B3"/>
+		<rect x="0" y="40" width="20" height="40" fill="#EC5F67"/>
+		<rect x="20" y="40" width="20" height="40" fill="#F99157"/>
+		<rect x="40" y="40" width="20" height="40" fill="#FAC863"/>
+		<rect x="60" y="40" width="20" height="40" fill="#99C794"/>
+	</g>	
+	<g filter="url(#f2)">
+		<rect x="0" y="0" width="20" height="40" fill="#AB7967"/>
+		<rect x="20" y="0" width="20" height="40" fill="#C594C5"/>
+		<rect x="40" y="0" width="20" height="40" fill="#6699CC"/>
+		<rect x="60" y="0" width="20" height="40" fill="#5FB3B3"/>
+		<rect x="0" y="40" width="20" height="40" fill="#EC5F67"/>
+		<rect x="20" y="40" width="20" height="40" fill="#F99157"/>
+		<rect x="40" y="40" width="20" height="40" fill="#FAC863"/>
+		<rect x="60" y="40" width="20" height="40" fill="#99C794"/>
+	</g>	
+	<g>
+		<circle cx="40" cy="40" r="25" stroke="#fff" stroke-width="8" fill-opacity="0"/>
+		<circle cx="40" cy="40" r="14" stroke="#fff" stroke-width="3" fill-opacity="0"/>
+		<circle cx="40" cy="40" r="4" stroke="#fff" stroke-width="8" fill-opacity="0"/>
+	</g>
 </svg> 
