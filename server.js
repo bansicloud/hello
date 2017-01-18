@@ -74,7 +74,7 @@ paypal.payment.create(create_payment_json, function (error, payment) {
 });
 
 app.get('/:token', function (req, res) {
-    res.sendfile(__dirname + '/www/index.html');
+    res.sendFile(__dirname + '/www/index.html');
 });
 
 var webServer = http.createServer(app).listen(config.PORT);
