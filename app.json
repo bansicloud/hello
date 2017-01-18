@@ -6,9 +6,16 @@
     "ENVIRONMENT": "PIPE"
   },
   "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
   },
   "addons": [
-
+    "heroku-redis",
+    {
+      "plan": "heroku-redis:hobby-dev"
+    }
   ],
   "buildpacks": [
     {
