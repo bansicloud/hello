@@ -1,29 +1,37 @@
 var maxCALLERS = 7;
 var isInIFrame = (window.location != window.parent.location);
+var protocol = 'http'+((location.hostname == 'localhost') ? '' : 's')+'://';
+var appURL = protocol+location.hostname + ((location.hostname == 'localhost') ? ':3000' : '') +'/'; 
+var urlvars = {};
+var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+  function(m,key,value) { urlvars[key] = value; });
 
 function connect() {
+  //set background color for embedded room
+  if(isInIFrame && urlvars.backgroundColor){
+    var allBoxes = document.getElementsByClassName('divHolder');
+    allBoxes = [].slice.call(allBoxes);
+    allBoxes.map(function(item, key){
+      item.style.backgroundColor = urlvars.backgroundColor;
+    });
+  }
+
   easyrtc.dontAddCloseButtons();
   easyrtc.joinRoom(getRoomName());
   easyrtc.setRoomOccupantListener(callEverybodyElse);
   easyrtc.easyApp("easyrtc.multiparty", "selfVideo", ["callerVideo1", "callerVideo2", "callerVideo3", "callerVideo4", "callerVideo5", "callerVideo6", "callerVideo7"], connectionSuccess, connectionFailure);
   setRoomName();
-  if(isInIFrame === false){
-    document.getElementById('selfWrap').style.backgroundColor = '#34495e';
-    document.getElementById('caller1').style.backgroundColor = '#3498db';
-    document.getElementById('caller2').style.backgroundColor = '#2ecc71';
-    document.getElementById('caller3').style.backgroundColor = '#f1c40f';
-    document.getElementById('caller4').style.backgroundColor = '#e67e22';
-    document.getElementById('caller5').style.backgroundColor = '#e74c3c';
-    document.getElementById('caller6').style.backgroundColor = '#8e44ad';
-    document.getElementById('caller7').style.backgroundColor = '#16a085';
-    document.getElementById('copyURL').addEventListener('click', function(){
-      setClipboardText(location.href);
-      easyrtc.showError('','URL copied.');
-    });
-    document.getElementById('closeintro').addEventListener('click', function(){
-      document.getElementById('fixed').style.display = 'none';
-    });
-  }
+  document.getElementById('copyURL').addEventListener('click', function(){
+    setClipboardText(appURL+getRoomName());
+    easyrtc.showError('','URL copied.');
+  });
+  document.getElementById('embedCode').addEventListener('click', function(){
+    setClipboardText('<iframe src="'+(appURL+getRoomName())+'" width="520" height="640" frameborder="0" seamless></iframe>');
+    easyrtc.showError('','Embed Code copied.');
+  });
+  document.getElementById('closeintro').addEventListener('click', function(){
+    document.getElementById('fixed').style.display = 'none';
+  });
 }
 function callEverybodyElse(roomName, otherPeople) {
   easyrtc.setRoomOccupantListener(null); 
@@ -62,7 +70,7 @@ function getRoomName(){
   var roomName = location.pathname.substring(1);
   if(roomName == '') {
     var roomName = randomRoom();
-    var newurl = location.href + roomName;
+    var newurl = appURL + roomName;
     window.history.pushState({url: newurl}, roomName, newurl);
   }
   return roomName;
@@ -71,10 +79,8 @@ var randomRoom = function () {
   return Math.random().toString(36).substr(2, 10);
 };
 function setRoomName(){
-  if(isInIFrame === false){
-  document.getElementById('roomName').innerHTML = 'sayhello.li/'+getRoomName();
-  document.getElementById('roomName2').innerHTML = getRoomName();
-  }
+  document.getElementById('roomURL').innerHTML = 'sayhello.li/'+getRoomName();
+  document.getElementById('roomID').innerHTML = getRoomName();
 }
 function setClipboardText(text){
     var id = "mycustom-clipboard-textarea-hidden-id";
