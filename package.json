@@ -26,7 +26,8 @@
     "async": "0.2.x",
     "colors": "*",
     "underscore": "1.5.x",
-    "uglify-js": ""
+    "uglify-js": "",
+    "paypal-rest-sdk": ""
   },
   "devDependencies": {
     "fs": "0.0.2",

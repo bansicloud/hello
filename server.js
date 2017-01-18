@@ -7,6 +7,13 @@ var socketIo = require("socket.io");
 var uuid = require('node-uuid');
 var winston = require('winston');
 var easyrtc = require("./easyrtc");
+var paypal = require('paypal-rest-sdk');
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live
+  'client_id': 'AbfduytheG2K0fdFtBZDiIhzuoIjCTP1bogx9Zpz4AJDpuMNMHjQTDKZBr6bnuVE4x0ffC7NqAEgkKh_',
+  'client_secret': 'ELpfscSOx9AUxdH10jS_6_KwYtI-DRcFgNQTXvbmCVeXwovEimYl1Js0-T_Vjb4QafYeekH05wqR9Kx7'
+});
+
 
 //initialize logs file
 var logger = new winston.Logger({
@@ -28,6 +35,43 @@ app.use(function(req, res, next) {
 var config = {
 	PORT: process.env.PORT || 3000
 }
+
+app.get('/pay', function(req, res){
+var create_payment_json = {
+    "intent": "sale",
+    "payer": {
+        "payment_method": "paypal"
+    },
+    "redirect_urls": {
+        "return_url": "http://return.url",
+        "cancel_url": "http://cancel.url"
+    },
+    "transactions": [{
+        "item_list": {
+            "items": [{
+                "name": "Hello Private Room",
+                "sku": "private-ro0m",
+                "price": "5.00",
+                "currency": "USD",
+                "quantity": 1
+            }]
+        },
+        "amount": {
+            "currency": "USD",
+            "total": "5.00"
+        },
+        "description": "This is the payment description."
+    }]
+};
+paypal.payment.create(create_payment_json, function (error, payment) {
+    if (error) {
+        throw error;
+    } else {
+        console.log("Create Payment Response");
+        console.log(payment);
+    }
+});
+});
 
 app.get('/:token', function (req, res) {
     res.sendfile(__dirname + '/www/index.html');
