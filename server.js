@@ -38,54 +38,60 @@ var config = {
     REDIS_URL : process.env.REDIS_URL || '3000',
     REDIS_ROOM_PREFIX: 'PRIVATE:ROOM:'
 }
-
 app.get('/payment', function(req, res){
-    var create_payment_json = {
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"
-        },
-        "redirect_urls": {
-            "return_url": "http://localhost:3000/pay/success",
-            "cancel_url": "http://localhost:3000/pay/cancelled"
-        },
-        "transactions": [{
-            "item_list": {
-                "items": [{
-                    "name": "Hello Private Room ()",
-                    "sku": "PR_",
-                    "price": "8.00",
-                    "currency": "USD",
-                    "quantity": 1
-                }]
-            },
-            "amount": {
-                "currency": "USD",
-                "total": "8.00"
-            },
-            "description": "This is the one time fee for purchasing a private room (/) in Hello."
-        }]
-    };
-    paypal.payment.create(create_payment_json, function (error, payment) {
-        if (error) {
-            throw error;
-        } else {
-            console.log("Create Payment Response");
-            console.log(payment);
-    if(payment.payer.payment_method === 'paypal') {
-          //req.session.paymentId = payment.id;
-          var redirectUrl;
-          for(var i=0; i < payment.links.length; i++) {
-            var link = payment.links[i];
-            if (link.method === 'REDIRECT') {
-              redirectUrl = link.href;
-            }
-          }
-          res.redirect(redirectUrl);
-        }
+	var email = req.body.email;
+	var roomId = req.body.roomid;
+	if(roomId){
+		redis.hget(REDIS_ROOM_PREFIX+roomId, function(){});
+	    var create_payment_json = {
+		"intent": "sale",
+		"payer": {
+		    "payment_method": "paypal"
+		},
+		"redirect_urls": {
+		    "return_url": "http://localhost:3000/pay/success",
+		    "cancel_url": "http://localhost:3000/pay/cancelled"
+		},
+		"transactions": [{
+		    "item_list": {
+			"items": [{
+			    "name": "Hello Private Room ()",
+			    "sku": "PR_",
+			    "price": "8.00",
+			    "currency": "USD",
+			    "quantity": 1
+			}]
+		    },
+		    "amount": {
+			"currency": "USD",
+			"total": "8.00"
+		    },
+		    "description": "This is the one time fee for purchasing a private room (/) in Hello."
+		}]
+	    };
+	    paypal.payment.create(create_payment_json, function (error, payment) {
+		if (error) {
+		    throw error;
+		} else {
+		    console.log("Create Payment Response");
+		    console.log(payment);
+	    if(payment.payer.payment_method === 'paypal') {
+		  //req.session.paymentId = payment.id;
+		  var redirectUrl;
+		  for(var i=0; i < payment.links.length; i++) {
+		    var link = payment.links[i];
+		    if (link.method === 'REDIRECT') {
+              		redirectUrl = link.href;
+		    }
+		  }
+		  res.redirect(redirectUrl);
+		}
 
-        }
-    });
+		}
+	    });
+	}else{
+		//room id not present
+	}
 });
 
 app.get('/pay/:status', function(req, res){
