@@ -33,10 +33,13 @@ app.use(function(req, res, next) {
 });
 
 var config = {
-	PORT: process.env.PORT || 3000
+	PORT: process.env.PORT || 3000,
+    APPURL: ((process.env.PORT) ? ((process.env.ENVIRONMENT == 'PIPE') ? 'https://'+process.env.HEROKU_APP_NAME+'.herokuapp.com' : 'https://sayhello.li') : 'http://localhost:3000')+'/',
+    REDIS_URL : process.env.REDIS_URL || '3000',
+    REDIS_ROOM_PREFIX: 'PRIVATE:ROOM:'
 }
 
-app.get('/pay', function(req, res){
+app.get('/payment', function(req, res){
     var create_payment_json = {
         "intent": "sale",
         "payer": {
@@ -49,18 +52,18 @@ app.get('/pay', function(req, res){
         "transactions": [{
             "item_list": {
                 "items": [{
-                    "name": "Hello Private Room",
-                    "sku": "private-ro0m",
-                    "price": "5.00",
+                    "name": "Hello Private Room ()",
+                    "sku": "PR_",
+                    "price": "8.00",
                     "currency": "USD",
                     "quantity": 1
                 }]
             },
             "amount": {
                 "currency": "USD",
-                "total": "5.00"
+                "total": "8.00"
             },
-            "description": "This is the payment description."
+            "description": "This is the one time fee for purchasing a private room (/) in Hello."
         }]
     };
     paypal.payment.create(create_payment_json, function (error, payment) {

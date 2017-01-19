@@ -3,7 +3,13 @@
   "scripts": {
   },
   "env": {
-    "ENVIRONMENT": "PIPE"
+    "ENVIRONMENT": "PIPE",
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "HEROKU_PARENT_APP_NAME": {
+      "required": true
+    }
   },
   "formation": {
     "web": {
