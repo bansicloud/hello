@@ -13,7 +13,7 @@ paypal.configure({
   'client_id': 'AbfduytheG2K0fdFtBZDiIhzuoIjCTP1bogx9Zpz4AJDpuMNMHjQTDKZBr6bnuVE4x0ffC7NqAEgkKh_',
   'client_secret': 'ELpfscSOx9AUxdH10jS_6_KwYtI-DRcFgNQTXvbmCVeXwovEimYl1Js0-T_Vjb4QafYeekH05wqR9Kx7'
 });
-
+//vasanthv87-facilitator-1@gmail.com
 
 //initialize logs file
 var logger = new winston.Logger({
@@ -37,42 +37,66 @@ var config = {
 }
 
 app.get('/pay', function(req, res){
-var create_payment_json = {
-    "intent": "sale",
-    "payer": {
-        "payment_method": "paypal"
-    },
-    "redirect_urls": {
-        "return_url": "http://return.url",
-        "cancel_url": "http://cancel.url"
-    },
-    "transactions": [{
-        "item_list": {
-            "items": [{
-                "name": "Hello Private Room",
-                "sku": "private-ro0m",
-                "price": "5.00",
+    var create_payment_json = {
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "redirect_urls": {
+            "return_url": "http://localhost:3000/pay/success",
+            "cancel_url": "http://localhost:3000/pay/cancelled"
+        },
+        "transactions": [{
+            "item_list": {
+                "items": [{
+                    "name": "Hello Private Room",
+                    "sku": "private-ro0m",
+                    "price": "5.00",
+                    "currency": "USD",
+                    "quantity": 1
+                }]
+            },
+            "amount": {
                 "currency": "USD",
-                "quantity": 1
-            }]
-        },
-        "amount": {
-            "currency": "USD",
-            "total": "5.00"
-        },
-        "description": "This is the payment description."
-    }]
-};
-paypal.payment.create(create_payment_json, function (error, payment) {
-    if (error) {
-        throw error;
-    } else {
-        console.log("Create Payment Response");
-        console.log(payment);
-    }
-});
+                "total": "5.00"
+            },
+            "description": "This is the payment description."
+        }]
+    };
+    paypal.payment.create(create_payment_json, function (error, payment) {
+        if (error) {
+            throw error;
+        } else {
+            console.log("Create Payment Response");
+            console.log(payment);
+    if(payment.payer.payment_method === 'paypal') {
+          //req.session.paymentId = payment.id;
+          var redirectUrl;
+          for(var i=0; i < payment.links.length; i++) {
+            var link = payment.links[i];
+            if (link.method === 'REDIRECT') {
+              redirectUrl = link.href;
+            }
+          }
+          res.redirect(redirectUrl);
+        }
+
+        }
+    });
 });
 
+app.get('/pay/:status', function(req, res){
+    paypal.payment.get(paymentId, function (error, payment) {
+        if (error) {
+            console.log(error);
+            throw error;
+        } else {
+            console.log("Get Payment Response");
+            console.log(JSON.stringify(payment));
+        }
+
+    });
+})
 app.get('/:token', function (req, res) {
     res.sendFile(__dirname + '/www/index.html');
 });
