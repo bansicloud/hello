@@ -32,6 +32,9 @@ function connect() {
   document.getElementById('closeintro').addEventListener('click', function(){
     document.getElementById('fixed').style.display = 'none';
   });
+  if(urlvars.key){
+    
+  }
 }
 function callEverybodyElse(roomName, otherPeople) {
   easyrtc.setRoomOccupantListener(null); 
@@ -80,7 +83,7 @@ var randomRoom = function () {
 };
 function setRoomName(){
   document.getElementById('roomURL').innerHTML = 'sayhello.li/'+getRoomName();
-  document.getElementById('roomID').innerHTML = getRoomName();
+  document.getElementById('roomID').innerHTML = '/'+getRoomName();
 }
 function setClipboardText(text){
     var id = "mycustom-clipboard-textarea-hidden-id";
