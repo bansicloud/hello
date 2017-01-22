@@ -114,3 +114,47 @@ function setClipboardText(text){
         console.log('Unable to copy.');
     }
 }
+
+var roomAvailable = false;
+document.getElementById('formRoomName').addEventListener('change', function(e){
+  var roomId = document.getElementById('formRoomName').value;
+  var validRoom = roomId.match(/^[a-zA-Z0-9\-_]+$/);
+  if(validRoom && validRoom.length > 0){
+    var r = new XMLHttpRequest();
+    r.open('GET', '/private/check?room='+document.getElementById('formRoomName').value, true);
+    r.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    r.onreadystatechange = function () {
+      if (r.readyState != 4 || r.status != 200) return;
+      var response = (JSON.parse(r.responseText));
+      var roomPrivateURL = document.getElementById('roomPrivateURL');
+      if(response.status == true) {
+        roomPrivateURL.style.backgroundImage = 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABXElEQVRIS7WUOU7DQBSG/zd2REWPQgscACpEwyIjgRASNheAUCG4CwXQslSIIpKb2CmwXcMJKLhDqG3PoIniAN5iT+wpR6Pve/M2QsuHWuajUcGWfby4EIU9z3JuksAbE0h4JwqHBGwK4DawnGspaUTwF/6bcrr3zcHV3IJ8+EQjxN1cgjI4B+caaRfKgipwzxw8KAmqwpWKPAtOoF5guY+ZNt19PVoWWmwT45feyfA9bwDrwqc/mMADACsc+NYY309LVOBjgWEb3TjSAwGsJlFLiQ5hvFnuh7xThY8FO/0DHwLbmZRwPhKkGWFH/0wmNP1GtiIJOg9O3aeinUZ7/cO1KBY+Y+jmScDYF4ANFfi0BqWSnNCqRJ7poqoSCWfEznzTea6y6v8N2ixJXXjuoBVJVOCFk5yWqMJLV0UiAeNLdXKerkvpspOSGHw9MN2XKgXNe6O0TevIWhf8AATd5n2g7pqQAAAAAElFTkSuQmCC)';
+        roomAvailable = true;
+      }else{
+        roomPrivateURL.style.backgroundImage = 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAABcElEQVRIS+2WTXKCQBCFX3OBZC+eJXiSoCeIJqlKKn8ak2jl9wbgTcSziHuTAzgpqAJnZJhuFrqSHczwvu6efg2EPV+0Z30cAWyFD1+iVdCbboB1O4mmbHjahlUQTpSiP38RT/T3jAyWnfCdFF1nGxToVgrJxUE3uTCpO38+eysgJWAZdD8IuNLpEoghvn353k/i15xXPEuD7ieAy92yuCA14pnEg5/ELwYgu0nPel8gNZBAJOIVgBRSK67o0V9E49pDLsvVOf+G8vq2TDxsTsoDNQ6sKm7NgIPYWpcIT615/Gxdc/V6GoQ/AF249rjEnRlsu6seQlDDVjIbOQPg3OroFpEZnbPIJV4ExpmxFiARl0CsAJeJAJw2cXwFIHFoE8cbgCYOlUJKQBNxzoz6wWvTtNrvnIny2WUZK7o/jBLpzpWI28yoQKN2Eg0rHxx9MwFrzqG7Bs2CU/B+dXHRqOCczq0f/q+Ci6jp+jEDtmL/e0fSIeny4ewAAAAASUVORK5CYII=)';
+      }
+    };
+    r.send();
+  }else{
+    roomPrivateURL.style.backgroundImage = 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAABcElEQVRIS+2WTXKCQBCFX3OBZC+eJXiSoCeIJqlKKn8ak2jl9wbgTcSziHuTAzgpqAJnZJhuFrqSHczwvu6efg2EPV+0Z30cAWyFD1+iVdCbboB1O4mmbHjahlUQTpSiP38RT/T3jAyWnfCdFF1nGxToVgrJxUE3uTCpO38+eysgJWAZdD8IuNLpEoghvn353k/i15xXPEuD7ieAy92yuCA14pnEg5/ELwYgu0nPel8gNZBAJOIVgBRSK67o0V9E49pDLsvVOf+G8vq2TDxsTsoDNQ6sKm7NgIPYWpcIT615/Gxdc/V6GoQ/AF249rjEnRlsu6seQlDDVjIbOQPg3OroFpEZnbPIJV4ExpmxFiARl0CsAJeJAJw2cXwFIHFoE8cbgCYOlUJKQBNxzoz6wWvTtNrvnIny2WUZK7o/jBLpzpWI28yoQKN2Eg0rHxx9MwFrzqG7Bs2CU/B+dXHRqOCczq0f/q+Ci6jp+jEDtmL/e0fSIeny4ewAAAAASUVORK5CYII=)';
+  }
+});
+document.getElementById('payButton').addEventListener('click', function(e){
+  var email = document.getElementById('formEmail').value;
+  var roomId = document.getElementById('formRoomName').value;
+  if(validateEmail(email)){
+    var validRoom = roomId.match(/^[a-zA-Z0-9\-_]+$/);
+    if(validRoom && validRoom.length > 0 && roomAvailable == true){
+      document.getElementById('formError').innerHTML = '';
+      document.getElementById('formPrivate').submit();
+    }else{
+      document.getElementById('formError').innerHTML = 'Invalid Room';
+    }
+  }else{
+    document.getElementById('formError').innerHTML = 'Invalid Email address';
+  }
+});
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}

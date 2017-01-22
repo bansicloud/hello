@@ -28,7 +28,8 @@
     "underscore": "1.5.x",
     "uglify-js": "",
     "paypal-rest-sdk": "",
-    "redis": ""
+    "redis": "",
+    "nodemailer": ""
   },
   "devDependencies": {
     "fs": "0.0.2",

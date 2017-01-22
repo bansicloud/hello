@@ -7,13 +7,9 @@ var socketIo = require("socket.io");
 var uuid = require('node-uuid');
 var winston = require('winston');
 var easyrtc = require("./easyrtc");
-var paypal = require('paypal-rest-sdk');
-paypal.configure({
-  'mode': 'sandbox', //sandbox or live
-  'client_id': 'AbfduytheG2K0fdFtBZDiIhzuoIjCTP1bogx9Zpz4AJDpuMNMHjQTDKZBr6bnuVE4x0ffC7NqAEgkKh_',
-  'client_secret': 'ELpfscSOx9AUxdH10jS_6_KwYtI-DRcFgNQTXvbmCVeXwovEimYl1Js0-T_Vjb4QafYeekH05wqR9Kx7'
-});
-//vasanthv87-facilitator-1@gmail.com
+var redis =require('redis');
+var config = require('./config');
+var private = require('./private');
 
 //initialize logs file
 var logger = new winston.Logger({
@@ -32,82 +28,26 @@ app.use(function(req, res, next) {
 	next();
 });
 
-var config = {
-	PORT: process.env.PORT || 3000,
-    APPURL: ((process.env.PORT) ? ((process.env.ENVIRONMENT == 'PIPE') ? 'https://'+process.env.HEROKU_APP_NAME+'.herokuapp.com' : 'https://sayhello.li') : 'http://localhost:3000')+'/',
-    REDIS_URL : process.env.REDIS_URL || '3000',
-    REDIS_ROOM_PREFIX: 'PRIVATE:ROOM:'
-}
-app.get('/payment', function(req, res){
-	var email = req.body.email;
-	var roomId = req.body.roomid;
-	if(roomId){
-		redis.hget(REDIS_ROOM_PREFIX+roomId, function(){});
-	    var create_payment_json = {
-		"intent": "sale",
-		"payer": {
-		    "payment_method": "paypal"
-		},
-		"redirect_urls": {
-		    "return_url": "http://localhost:3000/pay/success",
-		    "cancel_url": "http://localhost:3000/pay/cancelled"
-		},
-		"transactions": [{
-		    "item_list": {
-			"items": [{
-			    "name": "Hello Private Room ()",
-			    "sku": "PR_",
-			    "price": "8.00",
-			    "currency": "USD",
-			    "quantity": 1
-			}]
-		    },
-		    "amount": {
-			"currency": "USD",
-			"total": "8.00"
-		    },
-		    "description": "This is the one time fee for purchasing a private room (/) in Hello."
-		}]
-	    };
-	    paypal.payment.create(create_payment_json, function (error, payment) {
-		if (error) {
-		    throw error;
-		} else {
-		    console.log("Create Payment Response");
-		    console.log(payment);
-	    if(payment.payer.payment_method === 'paypal') {
-		  //req.session.paymentId = payment.id;
-		  var redirectUrl;
-		  for(var i=0; i < payment.links.length; i++) {
-		    var link = payment.links[i];
-		    if (link.method === 'REDIRECT') {
-              		redirectUrl = link.href;
-		    }
-		  }
-		  res.redirect(redirectUrl);
-		}
+redisClient = redis.createClient({url: config.REDIS_URL});
 
-		}
-	    });
-	}else{
-		//room id not present
-	}
+
+app.get('/private', function(req,res){
+    res.sendFile(__dirname + '/www/private.html');
 });
+app.get('/private/check', private.check);
+app.post('/private/payment', private.payment);
+app.get('/private/return', private.paymentReturn);
+app.get('/private/lock', private.lock);
 
-app.get('/pay/:status', function(req, res){
-    paypal.payment.get(paymentId, function (error, payment) {
-        if (error) {
-            console.log(error);
-            throw error;
-        } else {
-            console.log("Get Payment Response");
-            console.log(JSON.stringify(payment));
-        }
-
-    });
-})
-app.get('/:token', function (req, res) {
-    res.sendFile(__dirname + '/www/index.html');
+app.get('/:room', function (req, res) {
+	var key = req.query.key;
+	var room = req.params.room;
+	if(key){
+		redisClient.hgetall(config.REDIS_ROOM_PREFIX+room, function(error, roomDetails){
+			if(roomDetails.room == 'locked') res.sendFile(__dirname + '/www/locked.html');
+			else res.sendFile(__dirname + '/www/index.html');
+		});
+	}else res.sendFile(__dirname + '/www/index.html');
 });
 
 var webServer = http.createServer(app).listen(config.PORT);
@@ -115,7 +55,7 @@ var webServer = http.createServer(app).listen(config.PORT);
 // Start Socket.io so it attaches itself to Express server
 var socketServer = socketIo.listen(webServer, {"log level":1});
 
-easyrtc.setOption("logLevel", "debug");
+//easyrtc.setOption("logLevel", "debug");
 
 // Overriding the default easyrtcAuth listener, only so we can directly access its callback
 easyrtc.events.on("easyrtcAuth", function(socket, easyrtcid, msg, socketCallback, callback) {

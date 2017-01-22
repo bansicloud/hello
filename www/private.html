@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+  <html>
+      <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+          <meta name="description" content="Hello lets you video chat with upto 6 people.">
+          <meta name="keywords" content="hello, html5 video chat, video conference, video chat, online video chat, webrtc video, peer-to-peer video chat">
+          <meta name="author" content="Vasanth V">
+          <title>Hello - Get a private room</title>
+          <link rel="shortcut icon" href="favicon.ico" />
+          <link rel="icon" href="icon.png" />
+          <script src="/socket.io/socket.io.js"></script>
+          <link rel="stylesheet" type="text/css" href="style.css" />
+      </head>
+      <body>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-19124340-20', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+        <div id="privateWrap">
+          <div id="innerPrivateWrap">
+            <div id="logo">
+              <img src="icon.png" width="75" />
+            </div>
+            <h1>Hello</h1>
+            <h2>Get a private room for $8</h2>
+            <div>
+              <strong>What is a private room?</strong> A private room is similar to the normal room, but the owner of the room has a KEY which can be used to lock the room anytime. Once locked no one new will be able to enter the room.
+              <p>Please fill in the form to get a private room.</p>
+            </div>
+            <form action="/private/payment" id="formPrivate" method="POST">
+              <div class="inputGroup">
+                <div class="input">
+                  <input type="text" name="email" id="formEmail" placeholder="Your email address">
+                </div>
+                <div class="formnote">This field is necessary as we will send the room-key to this email.</div>
+              </div>
+
+              <div class="inputGroup">
+                <div class="input" id="roomPrivateURL">
+                  <span id="formURL">sayhello.li/</span>
+                  <input type="text" id="formRoomName" name="roomid" placeholder="YOUR-ROOM" value="" />
+                </div>
+                <div class="formnote">Choose a custom private room URL</div>
+              </div>
+              <div>
+                <button type="button" id="payButton">Buy now for $8</button> <span id="formError"></span>
+              </div>
+            </form>
+            <br/>
+            <div id="privateTerms">
+              Note:<br/>
+              <ol>
+                <li>You will not be able to buy a room which is already bought.</li>
+                <li>You will receive the room Key by email. So please enter a valid email address.</li>
+                <li>Only you will be able to lock the room by providing the KEY.</li>
+                <li>This is a one time cost and you will not be asked to pay again.</li>
+                <li>THERE WILL BE NO REFUND.</li>
+                <li>For any queries tweet/DM me at <a href="https://twitter.com/vsnthv" target="_blank">@vsnthv</a>.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="script.min.js"></script>
+      </body>
+  </html>
