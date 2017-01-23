@@ -18,6 +18,10 @@
     }
   },
   "addons": [
+    "heroku-redis",
+    {
+      "plan": "heroku-redis:hobby-dev",
+    }
   ],
   "buildpacks": [
     {
