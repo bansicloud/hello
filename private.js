@@ -22,12 +22,19 @@ redisClient = redis.createClient({url: config.REDIS_URL});
 
 var check = function (req, res){
 	var roomId = req.query.room;
+	var key = req.query.key;
 	getRoom(roomId, function(error, result){
 		if(error){
-			res.json({error: true, message:'Error in checking room'});
+			res.json({status: 'error', message:'Error in checking room'});
 		}else{
-			if(result == null) res.json({status: true});
-			else res.json({status: false});
+			if(result == null) {
+				res.json({status: false});
+			}else{
+				if(key){
+					if(key == result.key) res.json({status: true, roomStatus: result.room});
+					else res.json({status: false, message: 'Invalid key'});
+				}else res.json({status: true});
+			}
 		}
 	});
 }
