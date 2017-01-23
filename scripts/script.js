@@ -157,7 +157,7 @@ function validateEmail(email) {
 
 var roomAvailable = false;
 if(document.getElementById('formRoomName')){
-  document.getElementById('formRoomName').addEventListener('change', function(e){
+  document.getElementById('formRoomName').addEventListener('keyup', function(e){
     var roomId = document.getElementById('formRoomName').value;
     var validRoom = roomId.match(/^[a-zA-Z0-9\-_]+$/);
     if(validRoom && validRoom.length > 0){
@@ -168,6 +168,7 @@ if(document.getElementById('formRoomName')){
           roomAvailable = true;
         }else{
           roomPrivateURL.style.backgroundImage = 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAABcElEQVRIS+2WTXKCQBCFX3OBZC+eJXiSoCeIJqlKKn8ak2jl9wbgTcSziHuTAzgpqAJnZJhuFrqSHczwvu6efg2EPV+0Z30cAWyFD1+iVdCbboB1O4mmbHjahlUQTpSiP38RT/T3jAyWnfCdFF1nGxToVgrJxUE3uTCpO38+eysgJWAZdD8IuNLpEoghvn353k/i15xXPEuD7ieAy92yuCA14pnEg5/ELwYgu0nPel8gNZBAJOIVgBRSK67o0V9E49pDLsvVOf+G8vq2TDxsTsoDNQ6sKm7NgIPYWpcIT615/Gxdc/V6GoQ/AF249rjEnRlsu6seQlDDVjIbOQPg3OroFpEZnbPIJV4ExpmxFiARl0CsAJeJAJw2cXwFIHFoE8cbgCYOlUJKQBNxzoz6wWvTtNrvnIny2WUZK7o/jBLpzpWI28yoQKN2Eg0rHxx9MwFrzqG7Bs2CU/B+dXHRqOCczq0f/q+Ci6jp+jEDtmL/e0fSIeny4ewAAAAASUVORK5CYII=)';
+          roomAvailable = false;
         }
       });
     }else{

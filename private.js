@@ -122,7 +122,10 @@ var paymentReturn = function(req, res){
 			if(payment.state == 'approved'){
 				redisClient.get(config.PENDING_PAYMENT_PREFIX+paymentId, function(error, roomId){
 					if(error) logger.error(error);
-					else redisClient.hset(config.REDIS_ROOM_PREFIX+roomId, 'status', payment.state);
+					else {
+						redisClient.hset(config.REDIS_ROOM_PREFIX+roomId, 'status', payment.state);
+						redisClient.del(config.PENDING_PAYMENT_PREFIX+paymentId);
+					}
 
 					res.sendFile(__dirname + '/www/payment.html');
 					redisClient.hgetall(config.REDIS_ROOM_PREFIX+roomId, function(error, roomDetails){
