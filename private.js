@@ -156,7 +156,6 @@ var paymentReturn = function(req, res){
 							if (error) logger.error(error);
 						});
 					});
-
 				});
 			}else{
 				res.send('Payment not approved. Please refresh or DM me on twitter.');
