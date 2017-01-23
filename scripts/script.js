@@ -7,7 +7,6 @@ var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
   function(m,key,value) { urlvars[key] = value; });
 
 function connect() {
-  //set background color for embedded room
   if(isInIFrame && urlvars.backgroundColor){
     var allBoxes = document.getElementsByClassName('divHolder');
     allBoxes = [].slice.call(allBoxes);
