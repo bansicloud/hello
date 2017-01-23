@@ -42,12 +42,11 @@ app.get('/private/lock', private.lock);
 app.get('/:room', function (req, res) {
 	var key = req.query.key;
 	var room = req.params.room;
-	if(key){
-		redisClient.hgetall(config.REDIS_ROOM_PREFIX+room, function(error, roomDetails){
-			if(roomDetails.room == 'locked') res.sendFile(__dirname + '/www/locked.html');
-			else res.sendFile(__dirname + '/www/index.html');
-		});
-	}else res.sendFile(__dirname + '/www/index.html');
+	redisClient.hgetall(config.REDIS_ROOM_PREFIX+room, function(error, roomDetails){
+		if(roomDetails.key != key && roomDetails.room == 'locked'){
+            res.sendFile(__dirname + '/www/locked.html');
+        }else res.sendFile(__dirname + '/www/index.html');
+	});
 });
 
 var webServer = http.createServer(app).listen(config.PORT);

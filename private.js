@@ -174,10 +174,8 @@ var lock = function (req, res){
 		getRoom(roomId, function(error, roomDetails){
 			if(roomDetails){
 				if(roomDetails.key == key){
-					if(lock == 1) var newLock = 'locked';
-					else var newLock = 'unlocked';
-					redisClient.hset(config.REDIS_ROOM_PREFIX+roomId, 'room', newLock);
-					res.json({status: 'success', message: 'Room '+newLock});
+					redisClient.hset(config.REDIS_ROOM_PREFIX+roomId, 'room', lock);
+					res.json({status: 'success', message: 'Room '+lock});
 				}else{
 					res.json({status: 'error', message: 'Invalid key'});
 				}
