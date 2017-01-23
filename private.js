@@ -138,17 +138,16 @@ var paymentReturn = function(req, res){
 							to: roomDetails.email,
 							subject: 'Hello from Hello',
 							text: 'Hello \n Please find your private room details below: \n\n '+
-									'Your room URL: https://sayhello.li/'+roomId+' \n\n '+
+									'Your room URL: https://sayhello.li/'+roomId+' Share this URL with the intended participants. \n\n '+
 									'Your room Key: '+roomDetails.key+' \n\n '+
-									'Your room Key: '+roomDetails.key+' \n\n '+
-									'Click this link to use the key: https://sayhello.li/'+roomId+'?key='+roomDetails.key+' \n\n '+
+									'Admin URL with Key: https://sayhello.li/'+roomId+'?key='+roomDetails.key+' This URL is only for admin to lock the Room. \n\n '+
 									'When you access the room with the correct Key, you will see a lock icon which can be toggled to lock/unlock the room. \n '+
 									'For any queries email me back.',
 							html: '<h1>Hello</h1>'+
 									'<div>Please find your private room details below:<br/><br/>'+
-									'Your room URL: <i><a href="'+roomURL+'" target="_blank">'+roomURL+'</a></i><br/><br/>'+
+									'Your room URL: <i><a href="'+roomURL+'" target="_blank">'+roomURL+'</a></i>. Share this URL with the intended participants.<br/><br/>'+
 									'Your room Key: <i>'+roomDetails.key+'</i><br/><br/>'+
-									'Click this link to use the key: <i><a href="'+roomURLKey+'" target="_blank">'+roomURLKey+'</a></i>'+
+									'Admin URL with Key: <i><a href="'+roomURLKey+'" target="_blank">'+roomURLKey+'</a></i>. This URL is only for admin to lock the room.'+
 									'</div>'+
 									'<p>When you access the room with the correct Key, you will see a lock icon which can be toggled to lock/unlock the room.</p>'+
 									'<p>For any queries email me back.</p>'

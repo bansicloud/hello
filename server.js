@@ -1,5 +1,5 @@
 //initialize all the npm packages
-var http    = require("http");
+var http = require("http");
 var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
@@ -7,7 +7,7 @@ var socketIo = require("socket.io");
 var uuid = require('node-uuid');
 var winston = require('winston');
 var easyrtc = require("./easyrtc");
-var redis =require('redis');
+var redis = require('redis');
 var config = require('./config');
 var private = require('./private');
 
@@ -43,8 +43,10 @@ app.get('/:room', function (req, res) {
 	var key = req.query.key;
 	var room = req.params.room;
 	redisClient.hgetall(config.REDIS_ROOM_PREFIX+room, function(error, roomDetails){
-		if(roomDetails.key != key && roomDetails.room == 'locked'){
-            res.sendFile(__dirname + '/www/locked.html');
+        if(roomDetails){
+            if(!roomDetails.key != key && roomDetails.room == 'locked'){
+                res.sendFile(__dirname + '/www/locked.html');
+            }else res.sendFile(__dirname + '/www/index.html');            
         }else res.sendFile(__dirname + '/www/index.html');
 	});
 });

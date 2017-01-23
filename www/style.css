@@ -54,7 +54,8 @@ h2{font-size: 150%;}
 .formnote{font-size: 80%;color:#777;}
 #formURL{float: left;box-sizing: border-box;padding: 10px 0px 10px 10px;}
 #formRoomName{width: 68%;padding-left: 0px;}
-#payButton{background: #FBC433;border:none;color:#fff;padding:10px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+#payButtonWrap{margin: 20px auto;}
+#payButton{background: #FBC433;text-decoration:none;border:none;color:#fff;padding:10px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
 #roomPrivateURL{background-position: right 10px center;background-repeat: no-repeat;}
 #formError{margin-left:10px;color:red;font-size: 80%;}
 #privateTerms{font-size: 90%;}
