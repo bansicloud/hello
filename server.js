@@ -34,6 +34,9 @@ redisClient = redis.createClient({url: config.REDIS_URL});
 app.get('/private', function(req,res){
     res.sendFile(__dirname + '/www/private.html');
 });
+app.get('/privacy', function(req,res){
+    res.sendFile(__dirname + '/www/privacy.html');
+});
 app.get('/private/check', private.check);
 app.post('/private/payment', private.payment);
 app.get('/private/return', private.paymentReturn);
