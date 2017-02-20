@@ -51,9 +51,9 @@ app.get('/:room', function (req, res) {
 	var room = req.params.room;
 	redisClient.hgetall(config.REDIS_ROOM_PREFIX+room, function(error, roomDetails){
         if(roomDetails){
-            if(!roomDetails.key != key && roomDetails.room == 'locked'){
+            if(roomDetails.key != key && roomDetails.room == 'locked'){
                 res.sendFile(__dirname + '/www/locked.html');
-            }else res.sendFile(__dirname + '/www/index.html');            
+            }else res.sendFile(__dirname + '/www/index.html');
         }else res.sendFile(__dirname + '/www/index.html');
 	});
 });
