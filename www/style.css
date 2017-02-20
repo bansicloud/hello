@@ -34,7 +34,7 @@ pre{margin:3px 0px;white-space: normal;font-size: 110%;color:#777;font-style: it
 #embedCode{background-color: #2980b9;}
 #weburl{font-size: 110%;font-weight: bold;}
 #terms{font-size: 70%;color: #ababab;margin-top: 10px;}
-#privacy{color: #ababab;}
+#legallink{color: #ababab;font-size: 90%;}
 #maker{padding-top: 5px;}
 #twitter{color: #2980b9;}
 
@@ -49,6 +49,7 @@ pre{margin:3px 0px;white-space: normal;font-size: 110%;color:#777;font-style: it
 h1, h2{font-weight: normal;text-align: center;}
 h1{font-size: 250%;}
 h2{font-size: 150%;}
+h3{font-size: 125%;}
 .inputGroup{margin:10px auto 30px;}
 .input{border:1px solid #ccc;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
 .input input{display: block;padding: 10px;width: 100%;background:none;border:none;box-sizing: border-box;}

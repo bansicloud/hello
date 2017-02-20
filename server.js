@@ -35,11 +35,11 @@ app.post('/api', function(req,res){
     var room = Math.random().toString(36).substr(2, 10);
     res.json({text: 'Here is your video chat room URL https://sayhello.li/'+room, link: 'https://sayhello.li/'+room});
 });
+app.get('/legal', function(req,res){
+    res.sendFile(__dirname + '/www/legal.html');
+});
 app.get('/private', function(req,res){
     res.sendFile(__dirname + '/www/private.html');
-});
-app.get('/privacy', function(req,res){
-    res.sendFile(__dirname + '/www/privacy.html');
 });
 app.get('/private/check', private.check);
 app.post('/private/payment', private.payment);
