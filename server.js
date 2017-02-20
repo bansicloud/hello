@@ -31,6 +31,10 @@ app.use(function(req, res, next) {
 redisClient = redis.createClient({url: config.REDIS_URL});
 
 
+app.post('/api', function(req,res){
+    var room = Math.random().toString(36).substr(2, 10);
+    res.json({text: 'Here is your video chat room URL https://sayhello.li/'+room, link: 'https://sayhello.li/'+room});
+});
 app.get('/private', function(req,res){
     res.sendFile(__dirname + '/www/private.html');
 });
