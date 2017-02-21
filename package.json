@@ -1,9 +1,9 @@
 {
-  "name": "bash",
-  "version": "0.0.1",
+  "name": "hello",
+  "version": "1.0.0",
   "homepage": "",
   "author": "Vasanth V <vasanthv87@gmail.com>",
-  "description": "EasyRTC enables quick development of webRTC",
+  "description": "Video chat with friends & family right from the browser.",
   "keywords": [
     "webRTC",
     "easy",
@@ -29,7 +29,8 @@
     "uglify-js": "",
     "paypal-rest-sdk": "",
     "redis": "",
-    "nodemailer": ""
+    "nodemailer": "",
+    "request": ""
   },
   "devDependencies": {
     "fs": "0.0.2",

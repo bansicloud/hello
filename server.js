@@ -35,6 +35,18 @@ app.post('/api', function(req,res){
     var room = Math.random().toString(36).substr(2, 10);
     res.json({text: 'Here is your video chat room URL https://sayhello.li/'+room, link: 'https://sayhello.li/'+room});
 });
+app.get('/oauth/slack', function(req,res){
+    var request = require('request');
+
+    request.post({url:'https://slack.com/api/oauth.access', form: {client_id:'143163789926.143168001270', client_secret: '52e8ce1440161b6feab5c52f3e330fb9', code: req.query.code, redirect_uri: 'https://sayhello.li/oauth/slack'}}, function(err,httpResponse,body){
+        res.json({
+            err: err,
+            httpResponse: httpResponse,
+            body: body
+        });
+    });
+
+});
 app.get('/legal', function(req,res){
     res.sendFile(__dirname + '/www/legal.html');
 });
