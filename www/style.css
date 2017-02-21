@@ -34,9 +34,11 @@ pre{margin:3px 0px;white-space: normal;font-size: 110%;color:#777;font-style: it
 #embedCode{background-color: #2980b9;}
 #weburl{font-size: 110%;font-weight: bold;}
 #terms{font-size: 70%;color: #ababab;margin-top: 10px;}
-#legallink{color: #ababab;font-size: 90%;}
+#aboutlink{color: #ababab;font-size: 90%;}
 #maker{padding-top: 5px;}
 #twitter{color: #2980b9;}
+.small{font-size: 80%;}
+.italic{font-style: italic;}
 
 @media only screen and (max-width: 768px) {
     .divHolder {width: 50%;height: 25%;}

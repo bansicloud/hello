@@ -24,10 +24,6 @@ function connect() {
     setClipboardText(appURL+getRoomName());
     easyrtc.showError('','URL copied.');
   });
-  document.getElementById('embedCode').addEventListener('click', function(){
-    setClipboardText('<iframe src="'+(appURL+getRoomName())+'" width="520" height="640" frameborder="0" seamless></iframe>');
-    easyrtc.showError('','Embed Code copied.');
-  });
   document.getElementById('closeintro').addEventListener('click', function(){
     document.getElementById('fixed').style.display = 'none';
   });

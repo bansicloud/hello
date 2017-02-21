@@ -33,7 +33,7 @@ redisClient = redis.createClient({url: config.REDIS_URL});
 
 app.post('/api', function(req,res){
     var room = Math.random().toString(36).substr(2, 10);
-    res.json({text: '!here is your video chat room URL https://sayhello.li/'+room, link: 'https://sayhello.li/'+room, "response_type": "in_channel"});
+    res.json({text: 'Here is your video chat room URL https://sayhello.li/'+room, link: 'https://sayhello.li/'+room, "response_type": "in_channel"});
 });
 app.get('/oauth/slack', function(req,res){
     var request = require('request');
@@ -44,8 +44,8 @@ app.get('/oauth/slack', function(req,res){
     });
 
 });
-app.get('/legal', function(req,res){
-    res.sendFile(__dirname + '/www/legal.html');
+app.get('/about', function(req,res){
+    res.sendFile(__dirname + '/www/about.html');
 });
 app.get('/private', function(req,res){
     res.sendFile(__dirname + '/www/private.html');
