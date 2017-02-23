@@ -47,6 +47,9 @@ app.get('/oauth/slack', function(req,res){
 app.get('/about', function(req,res){
     res.sendFile(__dirname + '/www/about.html');
 });
+app.get('/slack', function(req,res){
+    res.sendFile(__dirname + '/www/slack.html');
+});
 app.get('/private', function(req,res){
     res.sendFile(__dirname + '/www/private.html');
 });
