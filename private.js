@@ -132,7 +132,7 @@ var paymentReturn = function(req, res){
 						var nodemailer = require('nodemailer');
 						var transporter = nodemailer.createTransport({
 							service: 'gmail',
-							auth: {user: 'vasanth.sayhello@gmail.com', pass: 'Poiu&890'}
+							auth: {user: 'vasanth.sayhello@gmail.com', pass: 'poiu7890'}
 						});
 						var roomURL = config.APPURL+roomId;
 						var roomURLKey = config.APPURL+roomId+'?key='+roomDetails.key;
