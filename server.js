@@ -110,12 +110,3 @@ webServer.listen(config.PORT, function () {
     logger.info('listening on '+config.PORT);
     logger.info('App live at '+config.APPURL);
 });
-
-//minimize the public scripts
-var fs = require('fs');
-var UglifyJS = require('uglify-js'); 
-var result = UglifyJS.minify(["scripts/easyrtc.js", "scripts/script.js"]);
-fs.writeFile("www/script.min.js", result.code, function(err) {
-    if(err) console.log(err);
-    else console.log("File was successfully saved.");
-});
