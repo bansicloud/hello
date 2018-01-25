@@ -1,5 +1,5 @@
 ## Hello
-Its a video conference solution using HTML5 WEBRTC protocol. CHeck out the app at [https://its-hello.herokluapp.com](https://its-hello.herokluapp.com).
+Its a video conference solution using HTML5 WEBRTC protocol. Check out the app at [its-hello.herokuapp.com](https://its-hello.herokuapp.com).
 
 ## Prerequisites *(to setup locally)*:
 - Node.Js (6.x or above)
