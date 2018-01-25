@@ -30,7 +30,7 @@ pre{margin:3px 0px;white-space: normal;font-size: 110%;color:#777;font-style: it
 #closeintro{float: right;color: #2c3e50;background:none;border:none;font-size: 200%;line-height: 20px;position:relative;top:-10px;right:-10px;cursor: pointer;}
 #pitch{font-size: 110%;}
 #urlwrap{padding: 10px 5px;}
-#roomURL{border-bottom:1px dashed #000;padding: 5px 10px;}
+#roomURL{border-bottom:1px dashed #000;padding: 5px 10px;line-height: 2;}
 #copyURL, #embedCode{color: #fff;background:#16a085;padding:5px 10px;border:none;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
 #embedCode{background-color: #2980b9;}
 #weburl{font-size: 110%;font-weight: bold;}
