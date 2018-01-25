@@ -12,6 +12,11 @@
           <title>Hello</title>
           <link rel="shortcut icon" href="favicon.ico" />
           <link rel="icon" href="icon.png" />
+          <script type="text/javascript">
+          if (location.protocol != 'https:') {
+            location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+          }
+          </script>
           <script src="/socket.io/socket.io.js"></script>
           <link rel="stylesheet" type="text/css" href="style.css" />
           <script type="text/javascript" src="easyrtc.js"></script>
@@ -65,31 +70,11 @@
               </div>
               <div id="urlwrap">
                 Invite by sharing this URL &rarr; <span id="roomURL"></span>
-                <button id="copyURL">Copy URL</button>
+                <button id="copyURL">Copy</button>
               </div>
               <div id="tips" class="small italic">
-                You can change the room from address bar sayhello.li/YOUR-ROOM
-              </div>
-              
-<div style="width: 420px;height:60px;background:#fff;margin:10px auto;display: table;text-align:left;border-radius: 15px;border:2px solid #515151;cursor: pointer;position: relative;" onMouseOver="this.style.background = '#f9f9f9'" onMouseOut="this.style.background = '#fff'" onclick="window.open('https://circle.onl','_blank');">
-  <div style="display: table-row;">
-    <div style="display: table-cell;width:15%;vertical-align: middle;">
-      <div style="padding: 5px;">
-        <svg class="svg" viewBox="0 0 20 20" style="display: block;">
-          <circle cx="50%" cy="50%" r="7" stroke-width="4" stroke="#515151" fill="none" />
-        </svg>
-      </div>
-    </div>
-    <div style="display: table-cell;vertical-align: middle;">
-      <div style="padding: 5px 10px;">
-        <div style="margin: 0px;"><strong>Circle</strong><br/> Connect with people near you anonymously.</div>
-      </div>
-    </div>
-  </div>
-  <div style="position:absolute;top:2px;right: 5px;font-size: 80%;font-style: italic;">Sponsored</div>
-</div>
-
-              
+                You can change the room from address bar its-hello.herokuapp.com/YOUR-ROOM
+              </div>              
               <div id="maker">
                 Made by <a href="https://twitter.com/vsnthv" id="twitter" target="blank">@vsnthv</a>. <a href="/about" class="footerlink">About</a>
               </div>

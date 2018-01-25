@@ -60,7 +60,7 @@
     "requirejs": "^2.2.0",
     "strip-json-comments": "^2.0.1",
     "time-grunt": "^1.3.0"
-  },  
+  },
   "engines": {
     "node": ""
   }

@@ -7,9 +7,7 @@ var socketIo = require("socket.io");
 var uuid = require('node-uuid');
 var winston = require('winston');
 var easyrtc = require("./easyrtc");
-var redis = require('redis');
 var config = require('./config');
-var private = require('./private');
 
 //initialize logs file
 var logger = new winston.Logger({
@@ -28,17 +26,15 @@ app.use(function(req, res, next) {
 	next();
 });
 
-redisClient = redis.createClient({url: config.REDIS_URL});
-
 
 app.post('/api', function(req,res){
     var room = Math.random().toString(36).substr(2, 10);
-    res.json({text: 'Here is your video chat room URL https://sayhello.li/'+room, link: 'https://sayhello.li/'+room, "response_type": "in_channel"});
+    res.json({text: 'Here is your video chat room URL https://its-hello.herokuapp.com/'+room, link: 'https://its-hello.herokuapp.com/'+room, "response_type": "in_channel"});
 });
 app.get('/oauth/slack', function(req,res){
     var request = require('request');
 
-    request.post({url:'https://slack.com/api/oauth.access', form: {client_id:'143163789926.143168001270', client_secret: '52e8ce1440161b6feab5c52f3e330fb9', code: req.query.code, redirect_uri: 'https://sayhello.li/oauth/slack'}}, function(err,httpResponse,body){
+    request.post({url:'https://slack.com/api/oauth.access', form: {client_id:'143163789926.143168001270', client_secret: '52e8ce1440161b6feab5c52f3e330fb9', code: req.query.code, redirect_uri: 'https://its-hello.herokuapp.com/oauth/slack'}}, function(err,httpResponse,body){
         if(err) res.json(err);
         else res.redirect('/');
     });
@@ -50,24 +46,11 @@ app.get('/about', function(req,res){
 app.get('/slack', function(req,res){
     res.sendFile(__dirname + '/www/slack.html');
 });
-app.get('/private', function(req,res){
-    res.sendFile(__dirname + '/www/private.html');
-});
-app.get('/private/check', private.check);
-app.post('/private/payment', private.payment);
-app.get('/private/return', private.paymentReturn);
-app.get('/private/lock', private.lock);
 
 app.get('/:room', function (req, res) {
 	var key = req.query.key;
 	var room = req.params.room;
-	redisClient.hgetall(config.REDIS_ROOM_PREFIX+room, function(error, roomDetails){
-        if(roomDetails){
-            if(roomDetails.key != key && roomDetails.room == 'locked'){
-                res.sendFile(__dirname + '/www/locked.html');
-            }else res.sendFile(__dirname + '/www/index.html');
-        }else res.sendFile(__dirname + '/www/index.html');
-	});
+    res.sendFile(__dirname + '/www/index.html');
 });
 
 var webServer = http.createServer(app).listen(config.PORT);
