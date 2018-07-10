@@ -18,19 +18,19 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "4.x.x",
-    "body-parser": "1.x.x",
-    "node-uuid": "",
-    "winston": "",
-    "socket.io": "",
     "async": "0.2.x",
+    "body-parser": "1.x.x",
     "colors": "*",
-    "underscore": "1.5.x",
-    "uglify-js": "",
+    "express": "4.x.x",
+    "node-uuid": "",
+    "nodemailer": "",
     "paypal-rest-sdk": "",
     "redis": "",
-    "nodemailer": "",
-    "request": ""
+    "request": "",
+    "socket.io": "",
+    "uglify-js": "",
+    "underscore": "1.5.x",
+    "winston": "^2.4.0"
   },
   "devDependencies": {
     "fs": "0.0.2",
