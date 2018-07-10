@@ -99,7 +99,7 @@ var randomRoom = function () {
   return Math.random().toString(36).substr(2, 10);
 };
 function setRoomName(){
-  document.getElementById('roomURL').innerHTML = 'its-hello.herokuapp.com/'+getRoomName();
+  document.getElementById('roomURL').innerHTML = 'itshello.herokuapp.com/'+getRoomName();
   document.getElementById('roomID').innerHTML = '/'+getRoomName();
 }
 function setClipboardText(text){
