@@ -29,12 +29,12 @@ app.use(function(req, res, next) {
 
 app.post('/api', function(req,res){
     var room = Math.random().toString(36).substr(2, 10);
-    res.json({text: 'Here is your video chat room URL https://its-hello.herokuapp.com/'+room, link: 'https://its-hello.herokuapp.com/'+room, "response_type": "in_channel"});
+    res.json({text: 'Here is your video chat room URL https://itshello.herokuapp.com/'+room, link: 'https://itshello.herokuapp.com/'+room, "response_type": "in_channel"});
 });
 app.get('/oauth/slack', function(req,res){
     var request = require('request');
 
-    request.post({url:'https://slack.com/api/oauth.access', form: {client_id:'143163789926.143168001270', client_secret: '52e8ce1440161b6feab5c52f3e330fb9', code: req.query.code, redirect_uri: 'https://its-hello.herokuapp.com/oauth/slack'}}, function(err,httpResponse,body){
+    request.post({url:'https://slack.com/api/oauth.access', form: {client_id:'143163789926.143168001270', client_secret: '52e8ce1440161b6feab5c52f3e330fb9', code: req.query.code, redirect_uri: 'https://itshello.herokuapp.com/oauth/slack'}}, function(err,httpResponse,body){
         if(err) res.json(err);
         else res.redirect('/');
     });
