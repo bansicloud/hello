@@ -1,10 +1,9 @@
-## Hello
-Its a video conference solution using HTML5 WEBRTC (peer to peer) protocol. All the video calls are 100% peer to peer and the backend node js server is used only to serve the HTML and signalling server. Check out the app at [itshello.herokuapp.com](https://itshello.herokuapp.com). 
+## Introduction
+Hello is a video conference solution using WEBRTC protocol, implemented without any signaling server. So ideally it is just a simple HTML file that can be hosted in any server and still be able to make video call between 2 peers by exchanging the messages shown in the screen to discover your peer.
 
-## Prerequisites *(to setup locally)*:
-- Node.Js (6.x or above)
-- npm
+Demo: https://vasanthv.github.io/hello
 
+### For testing locally
 Run the following commands
 ```
 git clone https://github.com/vasanthv/hello.git
