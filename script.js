@@ -49,14 +49,19 @@ const setUpPeerConnection = () => {
             }
             const signalHash = LZString.compressToBase64(JSON.stringify(remoteMessage));
             if(isPeer){
-                console.log(signalHash);                    
+                document.getElementById('copyMessage').value = signalHash;
+                document.querySelector('#step1 .desc').innerHTML = "<i>Copy the below message and share it with your peer.</i>";
+                document.getElementById('step1').style.display = 'block';
             }else{
-                console.log(window.location.href+'#'+signalHash);
+                document.getElementById('copyMessage').value = window.location.href+'#'+signalHash;                
+                document.getElementById('step1').style.display = 'block';
+                document.getElementById('step2').style.display = 'block';
             }
         }
     }
     peerConnection.ontrack = (event) => {
         document.getElementById('callerVideo').srcObject = event.streams[0];
+        document.getElementById('blanket').style.display = 'none';
     };
     peerConnection.ondatachannel = (event) => {
         const channel = event.channel;
@@ -135,3 +140,17 @@ if(window.location.hash.length > 1){
     isPeer = true;
 }
 startApp();
+
+const copyBtn = () => {
+    document.getElementById('copyMessage').select();
+    document.execCommand('copy');
+    const copyBtn = document.querySelector('#step1 button');
+    copyBtn.innerHTML = "Copied";
+    setTimeout(() => {
+        copyBtn.innerHTML = "Copy";
+    }, 3000);
+}
+
+const connectBtn = () => {
+    document.getElementById('pasteMessage').value && onPeerSignal(document.getElementById('pasteMessage').value);
+}

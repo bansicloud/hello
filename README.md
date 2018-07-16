@@ -1,9 +1,13 @@
-## Introduction
-Hello is a video conference solution using WEBRTC protocol, implemented without any signaling server. So ideally it is just a simple HTML file that can be hosted in any server and still be able to make video call between 2 peers by exchanging the messages shown in the screen to discover your peer.
+# About Hello
+Hello is a peer-to-peer video call solution that does not have any signaling server. In other words, the server is purely for serving the HTML page & its assets and the video communication is 100% peer-to-peer using WebRTC.
 
-Demo: https://vasanthv.github.io/hello
+## Why is there a manual step involved?
+WebRTC is peer-to-peer protocol for the web but it does not have any mechanism for peer discovery. So there is a manual step involved to exchange your details, so that WebRTC can connect peer-to-peer.
 
-### For testing locally
+## What details am I exchanging with my peer?
+You will be exchanging your [SDP](https://developer.mozilla.org/en-US/docs/Web/API/RTCIceCandidate) & [ICE Candidates](https://developer.mozilla.org/en-US/docs/Web/API/RTCIceCandidate) which is necessary for your peer to connect to you. We share this details by converting it to a base64 encoded string, so that it can be transmitted through URL.
+
+### For trying out locally
 Run the following commands
 ```
 git clone https://github.com/vasanthv/hello.git
