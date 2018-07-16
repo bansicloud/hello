@@ -7,7 +7,7 @@ const peerConfig = {
         {'urls': 'stun:stun.iptel.org:3478'}
     ]
 };
-let peerConnection, signalChannel, localStream, signal, isPeer;
+let peerConnection, signalChannel, msgChannel, localStream, signal, isPeer;
 const remoteMessage = {sdp: null, ice: []};
 const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
@@ -33,7 +33,7 @@ const signalMsgHandler = async event => {
     await setPeerDescription(signal);
     await setPeerIceCandidates(signal);
 }
-const msgHandler = event => {};
+const msgHandler = event => addChat(event.data, false);
 
 const setUpPeerConnection = () => {
     peerConnection = new RTCPeerConnection(peerConfig);
@@ -153,4 +153,26 @@ const copyBtn = () => {
 
 const connectBtn = () => {
     document.getElementById('pasteMessage').value && onPeerSignal(document.getElementById('pasteMessage').value);
+}
+
+const toggleChat = () => {
+    document.getElementById('chatWrap').style.display = document.getElementById('chatWrap').style.display == 'none' ? 'block' : 'none';
+}
+
+document.getElementById('newmsg').addEventListener('keydown', (event) => {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        const newChat = event.target.textContent.trim();
+        msgChannel.send(newChat);
+        addChat(newChat, true);
+        event.target.textContent = '';
+    }
+});
+
+const addChat = (msg, isMine) => {
+    const chat = document.createElement('div');
+    chat.className = 'chat ' +(isMine ? 'mine': '');
+    chat.innerHTML = msg;
+    document.getElementById('chats').appendChild(chat);
+    document.getElementById('chatWrap').style.display = 'block';
 }
