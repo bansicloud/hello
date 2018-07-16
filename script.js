@@ -21,7 +21,6 @@ if(navigator.mediaDevices.getUserMedia) {
     })
     .then((stream) => {
         localStream = stream;
-        console.log(stream);
         onGetUserMediaSuccess(stream);
     })
     .catch(errorHandler);
@@ -29,7 +28,6 @@ if(navigator.mediaDevices.getUserMedia) {
     alert('Your browser does not support getUserMedia API');
 }
 const signalMsgHandler = async event => {
-    console.log(event);
     signal = JSON.parse(event.data);
     isPeer && peerConnection.addStream(localStream);
     await setPeerDescription(signal);
@@ -50,8 +48,6 @@ const setUpPeerConnection = () => {
                 }
             }
             const signalHash = LZString.compressToBase64(JSON.stringify(remoteMessage));
-            //TODO: create URL here
-            //TODO: set it as room URL
             if(isPeer){
                 console.log(signalHash);                    
             }else{
@@ -60,12 +56,9 @@ const setUpPeerConnection = () => {
         }
     }
     peerConnection.ontrack = (event) => {
-        console.log('got remote stream');
-        console.log(event.streams[0]);
         document.getElementById('callerVideo').srcObject = event.streams[0];
     };
     peerConnection.ondatachannel = (event) => {
-        console.log(event);
         const channel = event.channel;
         if(channel.label == 'signal'){
             signalChannel = event.channel;
@@ -101,7 +94,6 @@ const setLocalDescription = async (description) => {
 const setPeerDescription = async (signal) => {
     await peerConnection.setRemoteDescription(new RTCSessionDescription(signal.sdp));
     // Only create answers in response to offers
-    console.log(peerConnection);
     if(signal.sdp.type == 'offer') {
         const description = await peerConnection.createAnswer();
         isSafari && setTimeout(() => peerConnection.onicecandidate({candidate: null}), 1000);
@@ -119,7 +111,7 @@ const onPeerSignal = async (signalMsg) => {
     await setPeerDescription(signal);
     await setPeerIceCandidates(signal);
     peerConnection.addStream(localStream);
-    // createDataChannel('messages', msgHandler);
+    createDataChannel('messages', msgHandler);
     await createOffer();
     isSafari && setTimeout(() => peerConnection.onicecandidate({candidate: null}), 1000);
 }
@@ -136,21 +128,6 @@ const startApp = async () => {
         await setPeerIceCandidates(signal);
     }
 }
-
-/* 
-
-peerConnection.setRemoteDescription(new RTCSessionDescription(signal.sdp)).then(function() {
-    // Only create answers in response to offers
-    if(signal.sdp.type == 'offer') {
-        peerConnection.createAnswer().then(setLocalDescription).catch(errorHandler);
-    }
-}).catch(errorHandler);
-
-
-
-signal.ice.forEach(ice => peerConnection.addIceCandidate(new RTCIceCandidate(ice)).then(errorHandler).catch(errorHandler))
-
-*/
 
 // if the location.hash is present, treat as peer
 if(window.location.hash.length > 1){
