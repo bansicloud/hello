@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<meta name="description" content="Hello is a serverless peer-to-peer video chat app." />
+	<meta name="description" content="Hello is a 100% peer-to-peer video chat app." />
 	<meta name="keywords" content="video chat, webrtc, peer to peer" />
 	<meta name="author" content="Vasanth V" />
 	<meta name="application-name" content="Hello" />
@@ -72,18 +72,18 @@
 	<div id="blanket">
 		<div id="intro">
 			<div id="pitch">
-				<strong>Hello</strong> is a serverless peer-to-peer video chat app. It uses WebRTC for real time peer-to-peer video communication. WebRTC does not have peer discovery, so you have to follow the steps to connect with your peer.
+				<strong>Hello</strong> is a 100% peer-to-peer video chat app. It uses WebRTC for real time peer-to-peer video communication. WebRTC does not have peer discovery, so you have to follow the steps to connect with your peer.
 			</div>
 			<div class="formWrap" id="step1">
 				<hr />
 				<div class="desc"><strong>Step 1:</strong> <i>Copy the below URL and share it with your peer.</i></div>
-				<input type="text" value="" id="copyMessage" maxlength="2048"/>
+				<input type="text" value="" id="copyMessage" maxlength="4096" />
 				<button onclick="copyBtn()">Copy</button>
 			</div>
 			<div class="formWrap" id="step2">
 				<hr />
 				<div class="desc"><strong>Step 2:</strong> <i>Paste the answer you got from your peer.</i></div>
-				<input type="text" value="" id="pasteMessage"  maxlength="2048"/>
+				<input type="text" value="" id="pasteMessage"  maxlength="4096" />
 				<button onclick="connectBtn()">Connect</button>
 			</div>
 			<div id="footer">
